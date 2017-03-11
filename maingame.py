@@ -87,7 +87,7 @@ def runEndBoss():
 
 			printEmptyLine()
 			print (enemy.name + " was butchered by " +hero.name+ " with " +str(hero.health)+ " health left!)
-			printEmptyLine
+			printEmptyLine()
 
 			endGame()
 
@@ -123,7 +123,46 @@ def checkHealth():
 		continuedAction = input("Do you want to explore, continue towards your destination, drink water, eat meat or open inventory?")
 		doAction(continuedAction)
 	else:
-		pass	 						
+		pass
+
+def consume(food):
+	if food == "meat":
+		if hero.meat <= 0:
+			print ("You have no meat left")
+	else:
+		hero.health += 60
+		hero.meat -= 1
+
+		if hero.health >= 100:
+			hero.health = 100
+
+		print ("You ate meat. Now you are stronger and have " +str(hero.health)+ ",hitpoints and " +str(hero.meat)+ " chunk of meat left.")
+
+	printEmptyLine()
+	continuedAction = input("Do you want to explore, continue walking towards the destination, eat meat, drink water, or open the inventory?")
+	doAction = continuedAction 	 	
+
+	elif food == "water":
+		if hero.water <= 0:
+			print ("You have no water to drink")
+		else:
+			hero.health += 40
+			hero.water -= 1
+
+		print ("You drank a potion and now you have " +str(hero.health)+ ", hitpoints and " +str(hero.water)+ " flasks of watter left.")
+
+		printEmptyLine()
+		continuedAction = input("Do you want to explore, continue walking towards the destination, eat meat, drink water, or open the inventory?")
+		doAction = continuedAction
+
+	else:
+	pass	
+			
+
+			
+			
+					
+			 						
 					    		
     		
     		 	
