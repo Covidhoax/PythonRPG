@@ -1,4 +1,5 @@
 import random
+import time
 
 def printEmptyLine():
 	print ("")
@@ -93,7 +94,37 @@ def runEndBoss():
 		elif hero.health > 0 and enemy.health > 0:
 			continue	
 			
-    		
+def checkHealth():
+	if hero.meat > 0 and hero.water <= 0:
+		choice = input("You got " +str(hero.health)+ " hitpoints, You should devour some meat. (Enter meat, continue or explore)" )
+		if choice == "meat":
+			consume(choice)
+		else:
+			doAction(Choice)
+
+	elif hero.water > 0 and hero.meat <= 0:
+		choice = input("You got " +str(hero.health)+ " hitpoints, You should drink water. (Enter water, continue or explore)")
+		if choice == "water":
+			consume(choice)
+		else:
+			doAction(Choice)
+
+	elif hero.water > 0 and hero.meat > 0
+		choice = input("You have " +str(hero.health)+ " hitpoints, you should drink water or eat meat(Enter water or meat)")
+		if choice == "meat" or "water":
+			consume(choice)
+		else:
+			doAction(choice)
+
+	elif hero.water <= 0 or hero.mear <= 0
+		print ("You need healing, but you have no meat or water.")
+		printEmptyLine()
+		printEmptyLine()
+		continuedAction = input("Do you want to explore, continue towards your destination, drink water, eat meat or open inventory?")
+		doAction(continuedAction)
+	else:
+		pass	 						
+					    		
     		
     		 	
     					
