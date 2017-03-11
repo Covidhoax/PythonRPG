@@ -24,11 +24,11 @@ def runEndBossStory():
     printEmptyLine()
 
     time.sleep(10)
-    print ("Starting Fight in 3...")
+    print ("Starting Fight in III...")
     time.sleep(1)
-    print ("Starting Fight in 2...")
+    print ("Starting Fight in II...")
     time.sleep(1)
-    print ("Starting Fight in 1...")
+    print ("Starting Fight in I...")
     time.sleep(1)
     print ("TIME FOR BATTLE!!!")
 
@@ -93,7 +93,7 @@ def runEndBoss():
             elif hero.health > 0 and enemy.health > 0:
                 continue
 
-def checkHeal():
+def checkHealth():
     if hero.meat > 0 and hero.water <= 0:
         choice = input("You have " +str(hero.health)+ " hitpoints. You should eat some meat. (Enter meat, continue, or explore)")
         if choice == "meat":
@@ -107,9 +107,9 @@ def checkHeal():
             consume(choice)
         else:
             doAction(choice)
-        
+
     elif hero.water > 0 and hero.meat > 0:
-        choice = input("You have " +str(hero.health)+ " hitpoints. With " +str(hero.meat)+ " meat and " +str(hero.water)+ " water(s). You should eat some meat or drink some water. (Enter Meat or Water)")
+        choice = input("You have " +str(hero.health)+ " hitpoints. With " +str(hero.meat)+ " meat and " +str(hero.water)+ " flasks of water. You should eat some meat or drink some water. (Enter Meat or Water)")
         if choice == "meat" or "water":
             consume(choice)
         else:
@@ -166,13 +166,94 @@ def consume(food):
     else:
         pass
 
+def beginFight():
+    if hero.enemiesDefeated == randEndCheck:
+        runEndBossStory()
+
+    else:
+        enemyGoon.health = 40
+        fightDone = False
+
+        selectedWeapon = ["Crossbow", "Sword", "Dagger", "Club", "Spear", "Axe"];            
+
+        giveHeroWeapon = random.choice(selectedWeapon)
+        giveEnemyWeapon = random.choice(selectedWeapon)
+
+        printEmptyLine()
+        print (hero.name+ " pulled out a " +str(giveHeroWeapon)+ "!")
+        print (enemyGoon.name+ " pulled out a " +str(giveEnemyWeapon)+ "!")
+        printEmptyLine()
+
+        while hero.health <= 100 and enemy.health <= 40:
+            randomTurn = random.randint(1,10)
+            damageAmount = random.randint(1,20)
+
+            if randomTurn <=5 and randomTurn > 0 and fightDone == False:
+                if damageAmount >= 15:
+                    print (hero.name+ " attacked " +enemyGoon.name+ " for " +str(damageAmount)+ " damage! It was a CRITICAL HIT!")
+                    enemyGoon.health -= damageAmount
+                    time.sleep(1)
+                else:
+                    print (hero.name + " attacked " +enemyGoon.name+ " for " +str(damageAmount)+ " damage!")
+                    enemyGoon.health -= damageAmount
+                    time.sleep(1)
+            elif randomTurn <= 10 and randomTurn > 5 and fightDone == False:
+                if damageAmount >= 15:
+                    print (enemyGoon.name+ " attacked " +hero.name+ " for " +str(damageAmount)+ " damage! It was a CRITICAL HIT!.Hero is in Danger")
+                    hero.health -= damageAmount
+                    time.sleep(1)
+                else:
+                    print (enemyGoon.name+ " attacked " +hero.name+ " for " +str(damageAmount)+ " damage!")
+                    hero.health -= damageAmount
+                    time.sleep(1)
+            elif fightDone == False and randomTurn >= 17:
+                print ("Both " +hero.name+ " and " +enemyGoon.name+ " missed their attack!")
+
+            if hero.health <= 0 and enemyGoon.health > 0 and fightDone == False:
+                fightDone = True
+
+                printEmptyLine()
+                print (hero.name+ " got brutally murdered by " +enemyGoon.name+ ". ")
+                endGame()
+                break
+                        
+            elif enemyGoon.health <= 0 and hero.health > 0 and fightDone == False:
+                fightDone == True
+                
+                printEmptyLine()
+                print (enemy.name+ " was defeated by our hero, " +hero.name+ "!, and had " +str(hero.health)+ " hitpoints left!")
+                hero.enemiesDefeated += 1
+
+                if hero.health <100:
+                    printEmptyLine
+                    checkHealth()
+                    printEmptyLine()
+
+            elif hero.health <= 0 and enemyGoon.health <= 0 and fightDone == False:
+                fightDone == True
+
+                printEmptyLine()
+                print (enemy.name+ "and " +hero.name+ " both died!!")
+                printEmptyLine()
+                endGame()
+                break
+
+            else:
+                printEmptyLine()
+                continuedAction = input("Do you want " +hero.name+ " to explore, continue walking, eat ham, drink a potion, or open inventory?")
+                doAction(continuedAction)
+
+            if hero.health > 0 and enemyGoon.health > 0:
+                continue
+
 class Hero:
     def __init__(hero, name):
         hero.name = name
         hero.health = 100
         hero.water = 0
         hero.meat = 0
-
+        hero.enemiesDefeated = 0
+        
 class Enemy:
     def __init__(enemy, name):
         enemy.name = name
@@ -190,18 +271,23 @@ enemyGoon = EnemyGoon(enemy.name+ "'s warriors")
 printEmptyLine()
 print ("        T H E  B A T T L E   F O R   A R Z E N G O T H        ")
 time.sleep(2)
-print (hero.name+ " is a barbarian with a dream, willing to defeat the feared tyrant named... ")
+print (hero.name+ " is a BARBARIAN with a dream, motivated to defeat the feared tyrant named... ")
 time.sleep(4)
-print (enemy.name+ " Ruler of Arzengoth. The hero must first murder enemy warriors....   ")
+print (enemy.name+ " , The Ruthless Ruler of Arzengoth. The hero must first murder enemy warriors....   ")
 time.sleep(4)
-print (" Once the enemies are finished off, the hero shall meet his worst nightmare.....")
+print ("Once the enemies are finished off, the hero shall meet his worst nightmare.....")
 time.sleep(4)
-print ("in the final battle for Arzengoth with the mighty tyran. Defeat him and.......")
+print ("in the final battle for Arzengoth with the mighty evil Lord. Defeat him and.......")
 time.sleep(4)
-print ("Rule Arzengoth! Be a Good King or a Bad King, I do not care........")
+print ("Rule Arzengoth! Be a Good King, and save the people........")
+time.sleep(2)
+print ("Or be a Tyrant and torture the peasants....Choice is yours")
 time.sleep(2)
 print (" Thanks for playing. Game created By FARHAN NAYEEM ISLAM")
 printEmptyLine()
 time.sleep(2)
 
-                        
+randEndCheck = random.randint(3,9)
+
+choice = input ("Do you want " +hero.name+ " to explore, continue walking towards Arzengoth, eat meat, drink water, or open inventory?\n(Enter Continue, Explore, Meat, Water, or Inventory)")
+doAction(choice)
