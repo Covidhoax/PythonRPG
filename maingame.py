@@ -166,4 +166,42 @@ def consume(food):
     else:
         pass
 
+class Hero:
+    def __init__(hero, name):
+        hero.name = name
+        hero.health = 100
+        hero.water = 0
+        hero.meat = 0
 
+class Enemy:
+    def __init__(enemy, name):
+        enemy.name = name
+        enemy.health = 90
+
+class EnemyGoon:
+    def __init__(enemyGoon, name):
+        enemyGoon.name = name
+        enemyGoon.health = 40
+
+hero = Hero(input("Name the wannabe hero, if he gets to win he shall be mighty:   "))
+enemy = Enemy(input("Name the tyrant and mighty Nemesis:   "))
+enemyGoon = EnemyGoon(enemy.name+ "'s warriors")
+
+printEmptyLine()
+print ("        T H E  B A T T L E   F O R   A R Z E N G O T H        ")
+time.sleep(2)
+print (hero.name+ " is a barbarian with a dream, willing to defeat the feared tyrant named... ")
+time.sleep(4)
+print (enemy.name+ " Ruler of Arzengoth. The hero must first murder enemy warriors....   ")
+time.sleep(4)
+print (" Once the enemies are finished off, the hero shall meet his worst nightmare.....")
+time.sleep(4)
+print ("in the final battle for Arzengoth with the mighty tyran. Defeat him and.......")
+time.sleep(4)
+print ("Rule Arzengoth! Be a Good King or a Bad King, I do not care........")
+time.sleep(2)
+print (" Thanks for playing. Game created By FARHAN NAYEEM ISLAM")
+printEmptyLine()
+time.sleep(2)
+
+                        
