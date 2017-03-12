@@ -1,5 +1,6 @@
 import random
 import time
+import sys
 
 def printEmptyLine():
     print ("")
@@ -124,48 +125,7 @@ def checkHealth():
     else:
         pass
 
-def giveItem(item):
-    if item == "water":
-        hero.water += 1
-        print (hero.name+ " found some water. You now have " +str(hero.water)+ " water(s).")
-    elif item == "meat":
-        hero.meat += 1
-        print (hero.name+ " found meat. You now have " +str(hero.meat)+ " meat.")
-    else:
-        pass
-
-def consume(food):
-    if food == "meat":
-        if hero.meat <= 0:
-            print ("You do not have any meat!")
-
-        else:
-            hero.health += 60
-            hero.meat -= 1
-
-            if hero.health > 100:
-                hero.health = 100
-            
-            print ("You ate some meat! You now have " +str(hero.health)+ " hitpoints and " +str(hero.meat)+ " meat left.")
-        printEmptyLine()
-        continuedAction = input("Do you want " +hero.name+ " to explore, continue walking towards your destination, eat meat, drink some water, or open inventory?")
-        doAction(continuedAction)
-
-    elif food == "water":
-        if hero.water <= 0:
-            print ("You do not have any water!")
-
-        else:
-            hero.health = 40
-            hero.water -= 1
-            
-            print ("You drank some water! You now have " +str(hero.health)+ " hitpoints and " +str(hero.water)+ " water(s) left.")
-        printEmptyLine()
-        continuedAction = input("Do you want " +hero.name+ " to explore, continue walking towards , eat meat, drink some water, or open inventory?")
-        doAction(continuedAction)
-    else:
-        pass
-
+        
 def beginFight():
     if hero.enemiesDefeated == randEndCheck:
         runEndBossStory()
@@ -246,6 +206,140 @@ def beginFight():
             if hero.health > 0 and enemyGoon.health > 0:
                 continue
 
+
+def giveItem(item):
+    if item == "water":
+        hero.water += 1
+        print (hero.name+ " found some water. You now have " +str(hero.water)+ " water(s).")
+    elif item == "meat":
+        hero.meat += 1
+        print (hero.name+ " found meat. You now have " +str(hero.meat)+ " meat.")
+    else:
+        pass
+
+def consume(food):
+    if food == "meat":
+        if hero.meat <= 0:
+            print ("You do not have any meat!")
+
+        else:
+            hero.health += 60
+            hero.meat -= 1
+
+            if hero.health > 100:
+                hero.health = 100
+            
+            print ("You ate some meat! You now have " +str(hero.health)+ " hitpoints and " +str(hero.meat)+ " meat left.")
+        printEmptyLine()
+        continuedAction = input("Do you want " +hero.name+ " to explore, continue walking towards your destination, eat meat, drink some water, or open inventory?")
+        doAction(continuedAction)
+
+    elif food == "water":
+        if hero.water <= 0:
+            print ("You do not have any water!")
+
+        else:
+            hero.health = 40
+            hero.water -= 1
+            
+            print ("You drank some water! You now have " +str(hero.health)+ " hitpoints and " +str(hero.water)+ " water(s) left.")
+        printEmptyLine()
+        continuedAction = input("Do you want " +hero.name+ " to explore, continue walking towards , eat meat, drink some water, or open inventory?")
+        doAction(continuedAction)
+    else:
+        pass
+
+def doAction(choice):
+    if choice == "explore":
+        printEmptyLine()
+        
+        steps = random.randint(1,20)
+
+        print (hero.name+ " explored the area around him.")
+        if steps <= 10 and steps > 5:
+            giveItem("water")
+        elif steps <= 20 and steps > 15:
+            giveItem("meat")
+            
+        else:
+            print (hero.name+ " found nothing but shit and dust while exploring")
+
+            printEmptyLine()
+            continuedAction = input("Would you like " +hero.name+ " to explore the area, continue heading towards Arzengoth, eat meat, drink some water or open inventory? (Enter explore/continue/meat/water/inventory)")
+            doAction(continuedAction)
+
+    elif choice == "continue":
+        steps = random.randint(1,20)
+
+        if steps <= 8 and steps > 0:
+            printEmptyLine()
+
+            if hero.enemiesDefeated == randEndCheck:
+                runEndBossStory()
+
+            else:
+                print (hero.name+ " just been spotted by someone. It turned out to be one of the mighty tyrant " +enemyGoon.name+ "!" )
+    
+                choice = input("Do you want " +hero.name+ " to kill the enemy or flee and cry?(type either flee or attack")
+
+                strength = random.randint(1,20)
+                if choice == "attack":
+                    beginFight()
+            
+                elif choice == "flee" and strength >= 5 and strength <= 8 and hero.health <= 50:
+                    printEmptyLine()
+            
+                    print("The cowardly " +hero.name+ " managed to flee successfully!")
+                    printEmptyLine()
+            
+                    printEmptyLine()
+    
+                    continuedAction = input("Would you like " +hero.name+ " to explore the area, continue heading towards Arzengoth, eat meat, drink some water or open inventory? (Enter explore/continue/meat/water/inventory)")
+                    doAction(continuedAction)
+
+                else:
+                    print (hero.name+ " was not able to flee.He has no choice but to fight")
+                    beginfight()
+                
+        elif steps <= 10 and steps > 8:
+            giveItem("water")
+
+            printEmptyLine()
+            continuedAction = input("Would you like " +hero.name+ " to explore the area, continue heading towards Arzengoth, eat meat, drink some water or open inventory? (Enter explore/continue/meat/water/inventory)")
+            doAction(continuedAction)
+
+        elif steps <= 15 and steps > 11:
+            giveItem("meat")
+
+            printEmptyLine()
+            continuedAction = input("Would you like " +hero.name+ " to explore the area, continue heading towards Arzengoth, eat meat, drink some water or open inventory? (Enter explore/continue/meat/water/inventory)")
+            doAction(continuedAction)    
+
+        else:
+            print (hero.name+ " did not find anything but shit and bones")
+            printEmptyLine()
+            continuedAction = input("Would you like " +hero.name+ " to explore the area, continue heading towards Arzengoth, eat meat, drink some water or open inventory? (Enter explore/continue/meat/water/inventory)")
+            doAction(continuedAction)
+
+    elif choice == "exit":
+        exit()
+    elif choice == "water":
+        consume("water")
+    elif choice == "meat":
+        consume("meat")
+    elif choice == "inventory":
+        print (hero.name+ " has " +str(hero.meat) + " chunks of meat and " +str(hero.water)+ " flasks of water")
+
+        printEmptyLine()
+        continuedAction = input("Would you like " +hero.name+ " to explore the area, continue heading towards Arzengoth, eat meat, drink some water or open inventory? (Enter explore/continue/meat/water/inventory)")
+        doAction(continuedAction)
+
+    else:
+        printEmptyLine
+        decision = input("Invalid keystroke.Try again from explore/continue/meat/water/inventory:  ")
+        doAction(decision)    
+
+
 class Hero:
     def __init__(hero, name):
         hero.name = name
@@ -264,30 +358,33 @@ class EnemyGoon:
         enemyGoon.name = name
         enemyGoon.health = 40
 
-hero = Hero(input("Name the wannabe hero, if he gets to win he shall be mighty:   "))
-enemy = Enemy(input("Name the tyrant and mighty Nemesis:   "))
+hero = Hero(input("Name the wannabe hero, if he gets to win he shall be mighty: "))
+enemy = Enemy(input("Name the tyrant and mighty Nemesis:  "))
 enemyGoon = EnemyGoon(enemy.name+ "'s warriors")
 
 printEmptyLine()
 print ("        T H E  B A T T L E   F O R   A R Z E N G O T H        ")
 time.sleep(2)
-print (hero.name+ " is a BARBARIAN with a dream, motivated to defeat the feared tyrant named... ")
-time.sleep(4)
-print (enemy.name+ " , The Ruthless Ruler of Arzengoth. The hero must first murder enemy warriors....   ")
-time.sleep(4)
-print ("Once the enemies are finished off, the hero shall meet his worst nightmare.....")
-time.sleep(4)
-print ("in the final battle for Arzengoth with the mighty evil Lord. Defeat him and.......")
-time.sleep(4)
+print (hero.name+ " is a BARBARIAN with a dream, motivated to defeat the feared tyrant named..")
+time.sleep(3)
+print (enemy.name+ " , The Ruthless Ruler of Arzengoth. The hero must first murder enemy warriors..")
+time.sleep(3)
+print ("Once the enemies are finished off, the hero shall meet his worst nightmare..")
+time.sleep(3)
+print ("in the final battle for Arzengoth with the mighty evil Lord. Defeat him and..")
+time.sleep(3)
 print ("Rule Arzengoth! Be a Good King, and save the people........")
 time.sleep(2)
 print ("Or be a Tyrant and torture the peasants....Choice is yours")
 time.sleep(2)
 print (" Thanks for playing. Game created By FARHAN NAYEEM ISLAM")
+time.sleep(1)
+print ("Enter 'exit' without the quotes to exit game. This works after the intro only.")
+time.sleep(1)
 printEmptyLine()
 time.sleep(2)
 
-randEndCheck = random.randint(3,9)
+randEndCheck = random.randint(3,8)
 
-choice = input ("Do you want " +hero.name+ " to explore, continue walking towards Arzengoth, eat meat, drink water, or open inventory?\n(Enter Continue, Explore, Meat, Water, or Inventory)")
+choice = input("Do you want " +hero.name+ " to explore, continue walking towards Arzengoth, eat meat, drink water, or open inventory?\n(Enter Continue, Explore, Meat, Water, or Inventory)")
 doAction(choice)
