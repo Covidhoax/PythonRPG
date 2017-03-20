@@ -6,6 +6,10 @@
 2.Go to cmd/terminal and navigate to game directory
 3.Following command shall run game  >>>>python maingame.py
 
+###How to run test:
+python -m unittest test_maingame.py
+this will test a print function
+
 ##What is it about?
 Hero's mission is to murder the Tyrant ruler, and rule the kingdom!!
 

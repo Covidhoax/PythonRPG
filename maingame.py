@@ -358,33 +358,42 @@ class EnemyGoon:
         enemyGoon.name = name
         enemyGoon.health = 40
 
-hero = Hero(input("Name the wannabe hero, if he gets to win he shall be mighty: "))
-enemy = Enemy(input("Name the tyrant and mighty Nemesis:  "))
-enemyGoon = EnemyGoon(enemy.name+ "'s warriors")
 
-printEmptyLine()
-print ("        T H E  B A T T L E   F O R   A R Z E N G O T H        ")
-time.sleep(2)
-print (hero.name+ " is a BARBARIAN with a dream, motivated to defeat the feared tyrant named..")
-time.sleep(3)
-print (enemy.name+ " , The Ruthless Ruler of Arzengoth. The hero must first murder enemy warriors..")
-time.sleep(3)
-print ("Once the enemies are finished off, the hero shall meet his worst nightmare..")
-time.sleep(3)
-print ("in the final battle for Arzengoth with the mighty evil Lord. Defeat him and..")
-time.sleep(3)
-print ("Rule Arzengoth! Be a Good King, and save the people........")
-time.sleep(2)
-print ("Or be a Tyrant and torture the peasants....Choice is yours")
-time.sleep(2)
-print (" Thanks for playing. Game created By FARHAN NAYEEM ISLAM")
-time.sleep(1)
-print ("Enter 'exit' without the quotes to exit game. This works after the intro only.")
-time.sleep(1)
-printEmptyLine()
-time.sleep(2)
+def main():
 
-randEndCheck = random.randint(3,8)
+    hero = Hero(input("Name the wannabe hero, if he gets to win he shall be mighty: "))
+    enemy = Enemy(input("Name the tyrant and mighty Nemesis:  "))
+    enemyGoon = EnemyGoon(enemy.name+ "'s warriors")
 
-choice = input("Do you want " +hero.name+ " to explore, continue walking towards Arzengoth, eat meat, drink water, or open inventory?\n(Enter Continue, Explore, Meat, Water, or Inventory)")
-doAction(choice)
+    printEmptyLine()
+    print ("        T H E  B A T T L E   F O R   A R Z E N G O T H        ")
+    time.sleep(2)
+    print (hero.name+ " is a BARBARIAN with a dream, motivated to defeat the feared tyrant named..")
+    time.sleep(3)
+    print (enemy.name+ " , The Ruthless Ruler of Arzengoth. The hero must first murder enemy warriors..")
+    time.sleep(3)
+    print ("Once the enemies are finished off, the hero shall meet his worst nightmare..")
+    time.sleep(3)
+    print ("in the final battle for Arzengoth with the mighty evil Lord. Defeat him and..")
+    time.sleep(3)
+    print ("Rule Arzengoth! Be a Good King, and save the people........")
+    time.sleep(2)
+    print ("Or be a Tyrant and torture the peasants....Choice is yours")
+    time.sleep(2)
+    print (" Thanks for playing. Game created By FARHAN NAYEEM ISLAM")
+    time.sleep(1)
+    print ("Enter 'exit' without the quotes to exit game. This works after the intro only.")
+    time.sleep(1)
+    printEmptyLine()
+    time.sleep(2)
+    randEndCheck = random.randint(3,8)
+    choice = input("Do you want " +hero.name+ " to explore, continue walking towards Arzengoth, eat meat, drink water, or open inventory?\n(Enter Continue, Explore, Meat, Water, or Inventory)")
+    doAction(choice)
+
+
+if __name__ == '__main__':
+    main()    
+    
+
+
+
